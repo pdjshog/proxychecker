@@ -21,8 +21,6 @@ RUN docker-php-ext-install \
     pcntl \
     curl
 
-
-
 # Install Composer CLI
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
@@ -44,9 +42,6 @@ RUN php /var/www/html/bin/console make:command ProxyChecker
 RUN echo 'alias console="php /var/www/html/bin/console"' >> ~/.bashrc
 RUN echo 'alias dsu="/var/www/html/bin/console d:s:u --force --complete"' >> ~/.bashrc
 RUN echo "umask 0000" >> /root/.bashrc
-
-ENV COMPOSER_ALLOW_SUPERUSER=1
-RUN composer install  --no-scripts
 
 COPY ./src/Command/ProxyCheckerCommand.php /var/www/html/src/Command/ProxyCheckerCommand.php
 

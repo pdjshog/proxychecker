@@ -1,7 +1,7 @@
 services:
-  web:
+  php:
     build: ./
     restart: unless-stopped
-    container_name: check
-    ports:
-      - "9999:80"
+    container_name: proxychecker
+    volumes:
+      - ./live.txt:/var/www/html/live.txt

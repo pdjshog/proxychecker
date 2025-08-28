@@ -20,6 +20,7 @@ class ProxyCheckerCommand extends Command
     {
         $guzzle = new Client();
         $output->writeln('getting list');
+        file_put_contents('live.txt', '', FILE_APPEND);
 
         $content = $guzzle->get('https://proxylist.geonode.com/api/proxy-list?limit=500&page=1&sort_by=lastChecked&sort_type=desc')
             ->getBody()->getContents();
@@ -43,6 +44,7 @@ class ProxyCheckerCommand extends Command
             }
 
             $output->writeln("[LIVE] {$string}");
+            file_put_contents('live.txt', $string, FILE_APPEND);
         }
 
         return Command::SUCCESS;
