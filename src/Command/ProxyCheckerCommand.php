@@ -20,9 +20,8 @@ class ProxyCheckerCommand extends Command
     {
         $guzzle = new Client();
         $output->writeln('getting list');
-        file_put_contents('live.txt', '', FILE_APPEND);
-
-        $content = $guzzle->get('https://proxylist.geonode.com/api/proxy-list?limit=500&page=1&sort_by=lastChecked&sort_type=desc')
+        file_put_contents('live.txt', '');
+        $content = $guzzle->get('https://proxylist.geonode.com/api/proxy-list?country=RU&limit=500&page=1&sort_by=lastChecked&sort_type=desc')
             ->getBody()->getContents();
         $proxies = json_decode($content, true);
         $output->writeln('processing list');
@@ -39,7 +38,7 @@ class ProxyCheckerCommand extends Command
                     ],
                 ]);
             } catch (\Throwable $exception) {
-                $output->writeln("[DEAD] {$string}");
+                $output->writeln("[DEAD] {$string} : {$exception->getMessage()}");
                 continue;
             }
 
