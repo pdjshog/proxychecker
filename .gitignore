@@ -15,5 +15,5 @@ composer.lock
 .env
 symfony.lock
 .idea/
-/src/Controller
+/src/Controller/
 /src/Kernel.php
